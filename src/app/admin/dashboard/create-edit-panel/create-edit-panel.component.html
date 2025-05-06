@@ -1,0 +1,99 @@
+<form class="form-horizontal" autocomplete="off" #editForm="ngForm">
+  <abp-modal-header
+    [title]="title"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body mb-20">
+    <div class="container container-modal">
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Width:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="panel.width"
+            name="panelWidth"
+            #widthModel="ngModel"
+            #widthModelEl
+            required
+          />
+          <validation-summary
+            [control]="widthModel"
+            [controlEl]="widthModelEl"
+          ></validation-summary>
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Length:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="panel.length"
+            name="panelLength"
+            #lengthModel="ngModel"
+            #lengthModelEl
+            required
+          />
+          <validation-summary
+            [control]="lengthModel"
+            [controlEl]="lengthModelEl"
+          ></validation-summary>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-15">
+      <div class="col-6">
+        <label class="txt-14 fw-500 mb-10"> Power: </label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="panel.power"
+          name="power"
+          #powerModel="ngModel"
+          #powerModelEl
+          required
+        />
+        <validation-summary
+          [control]="powerModel"
+          [controlEl]="powerModelEl"
+        ></validation-summary>
+      </div>
+      <div class="col-6">
+        <label class="txt-14 fw-500 mb-10"> Stock: </label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="panel.stock"
+          name="stock"
+          #stockModel="ngModel"
+          #stockModelEl
+          required
+        />
+        <validation-summary
+          [control]="stockModel"
+          [controlEl]="stockModelEl"
+        ></validation-summary>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="btns btns--start">
+            <button class="btn btn-secondary" type="button" (click)="cancel()">
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              (click)="save(editForm)"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

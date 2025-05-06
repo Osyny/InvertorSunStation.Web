@@ -1,0 +1,114 @@
+<form class="form-horizontal" autocomplete="off" #configuratorForm="ngForm">
+  <abp-modal-header
+    [title]="title"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body mb-20">
+    <div class="container container-modal">
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Width Roof mm:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="input.widthRoof"
+            name="widthRoof"
+            #widthRoofModel="ngModel"
+            #widthRoofModelEl
+            required
+          />
+          <validation-summary
+            [control]="widthRoofModel"
+            [controlEl]="widthRoofModelEl"
+          ></validation-summary>
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Length Roof mm:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="input.lengthRoof"
+            name="lengthRoof"
+            #lengthRoofModel="ngModel"
+            #lengthRoofModelEl
+            required
+          />
+          <validation-summary
+            [control]="lengthRoofModel"
+            [controlEl]="lengthRoofModelEl"
+          ></validation-summary>
+        </div>
+      </div>
+      <ng-container *ngIf="result">
+        <div>
+          <hr />
+          <h3>Result:</h3>
+          <div class="row mb-15">
+            <div class="col-6">
+              <label class="txt-14 fw-500 mb-10">Width, mm:</label>
+              <input
+                readonly
+                type="text"
+                class="form-control"
+                [(ngModel)]="result.panel.width"
+                name="width"
+              />
+            </div>
+            <div class="col-6">
+              <label class="txt-14 fw-500 mb-10">Length, mm:</label>
+              <input
+                readonly
+                type="text"
+                class="form-control"
+                [(ngModel)]="result.panel.length"
+                name="length"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-15">
+          <div class="col-6">
+            <label class="txt-14 fw-500 mb-10">Count:</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              [(ngModel)]="result.count"
+              name="count"
+            />
+          </div>
+          <div class="col-6">
+            <label class="txt-14 fw-500 mb-10">Total power, watts:</label>
+            <input
+              readonly
+              type="text"
+              class="form-control"
+              [(ngModel)]="result.totalPower"
+              name="totalPower"
+            />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="btns btns--start">
+            <button class="btn btn-secondary" type="button" (click)="cancel()">
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              (click)="configurator(configuratorForm)"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

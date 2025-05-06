@@ -1,0 +1,49 @@
+<form class="form-horizontal" autocomplete="off" #warmMessageForm="ngForm">
+  <ng-container *ngIf="!isConfirmModal">
+    <abp-modal-header
+      [title]="title"
+      (onCloseClick)="bsModalRef.hide()"
+    ></abp-modal-header>
+  </ng-container>
+
+  <div class="modal-body mb-20">
+    <div class="d-flex justify-content-center mb-20">
+      <img width="35" height="35" src="assets/img/warning-icon.png" />
+    </div>
+    <div class="container">
+      <div class="row mb-15">
+        <div class="col-12">
+          <h2>
+            {{ messages }}
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="isConfirmModal">
+    <div class="modal-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="btns btns--start">
+              <button
+                class="btn btn-secondary"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button
+                class="btn btn-primary"
+                type="submit"
+                (click)="send(warmMessageForm)"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</form>
