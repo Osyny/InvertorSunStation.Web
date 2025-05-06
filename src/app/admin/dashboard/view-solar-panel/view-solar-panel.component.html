@@ -1,0 +1,54 @@
+<div class="form-horizontal">
+  <abp-modal-header
+    [title]="title"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body mb-20">
+    <div class="container container-modal">
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Width:</label>
+          <input
+            readonly
+            type="text"
+            class="form-control"
+            [(ngModel)]="solarPanel.width"
+            name="width"
+          />
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">length:</label>
+          <input
+            readonly
+            type="text"
+            class="form-control"
+            [(ngModel)]="solarPanel.length"
+            name="length"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Power: </label>
+          <input
+            readonly
+            type="text"
+            class="form-control"
+            [(ngModel)]="solarPanel.power"
+            name="power"
+          />
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10"> Stock: </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="solarPanel.stock"
+            name="stock"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
