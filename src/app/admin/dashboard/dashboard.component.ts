@@ -14,12 +14,14 @@ import { SolarPanelService } from '../../services/solar-panel/solar-panel.servic
 import { SolarPanelDisplayedDto } from '../../models/solar-panels/solar-panel.displayed.dto';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { FilterInput } from './dtos/filter-input';
-import { ViewSolarPanelComponent } from './view-solar-panel/view-solar-panel.component';
-import { ConfiguratorComponent } from './configurator/configurator.component';
+import { FilterInput } from '../solar-panels/dtos/filter-input';
+import { ViewSolarPanelComponent } from '../solar-panels/view-solar-panel/view-solar-panel.component';
+import { ConfiguratorComponent } from '../solar-panels/configurator/configurator.component';
 import { ModalMessagesComponent } from '../../shared/modal-messages/modal-messages.component';
 import { ToastrService } from 'ngx-toastr';
-import { CreateEditPanelComponent } from './create-edit-panel/create-edit-panel.component';
+import { CreateEditPanelComponent } from '../solar-panels/create-edit-panel/create-edit-panel.component';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,9 +43,8 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
 
   constructor(
     injector: Injector,
-    private solarPanelService: SolarPanelService,
-    private readonly _modalService: BsModalService,
-    private toastr: ToastrService
+    private authService: AuthService,
+    private router: Router
   ) {
     super(injector);
   }
@@ -55,127 +56,15 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
     this.$unsubscribe.complete();
   }
 
-  isPaginated(event?: TableLazyLoadEvent) {
-    let res = event?.first != this.totalRecords && this.totalRecords != 0;
-    return res;
+  click() {
+    this.router.navigateByUrl('admin/solar-panel');
   }
 
-  lazyLoad(isFilter: boolean, event?: TableLazyLoadEvent) {
-    if (
-      this.isPaginated(event) &&
-      !isFilter &&
-      this._primengTableHelper.isSkipLoading(this.totalRecords)
-    ) {
-      return;
-    }
-
-    this.inputData.rows = event ? event.rows : this.rows;
-    this.inputData.skip = event ? event.first : this.first;
-    this.inputData.filterText = !this.filterText ? '' : this.filterText;
-    this.inputData.sorting =
-      this._primengTableHelper.getSortingFromLazyLoad(event);
-
-    setTimeout(() => this.loadDataPanels(this.inputData));
-  }
-
-  loadDataPanels(input: FilterInput) {
-    this.loading = true;
-    this.solarPanelService
-      .getAll(input)
-      .pipe(
-        takeUntil(this.$unsubscribe),
-        finalize(() => (this.loading = false))
-      )
-      .subscribe((res) => {
-        this.setDataStation(res);
-      });
-  }
-
-  setDataStation(res: SolarPanelsResponse) {
-    this.loading = false;
-    this.solarPanels = res.solarPanels;
-
-    this.totalRecords = res.total;
-  }
-
-  reloadPage(isFirstPage = false) {
-    if (isFirstPage && this.first !== 0) {
-      this.first = 0;
-      return;
-    }
-    this.lazyLoad(false);
-  }
-
-  setComparedClass(value: string) {
-    return value;
-  }
-
-  editOrAdd(panel?: SolarPanelDto) {
-    let isEdit = false;
-    if (!panel) {
-      panel = new SolarPanelDisplayedDto();
-    } else {
-      isEdit = true;
-    }
-    const createOrEditModal = this._modalService.show(
-      CreateEditPanelComponent,
-      {
-        class: 'modal-lg',
-        initialState: {
-          panel: panel,
-          isEdit: isEdit,
-        },
-      }
-    );
-    createOrEditModal.content?.onSave.subscribe(() => {
-      this.reloadPage();
+  getEmploys() {
+    this.authService.test().subscribe((res) => {
+      debugger;
+      let r = res;
     });
   }
-
-  view(solarPanel?: SolarPanelDto) {
-    const viewModal = this._modalService.show(ViewSolarPanelComponent, {
-      class: 'modal-lg',
-      initialState: {
-        solarPanel: solarPanel,
-      },
-    });
-  }
-
-  calculation() {
-    const ConfiguratorModal = this._modalService.show(ConfiguratorComponent, {
-      class: 'modal-lg',
-    });
-  }
-
-  tryDelete(panel: SolarPanelDto) {
-    const messModal = this._modalService.show(ModalMessagesComponent, {
-      class: 'modal-lg',
-      initialState: {
-        title: 'Delete Confirmation',
-        messages: `Are you sure want to delete ${panel.width} * ${panel.length}'?`,
-        isConfirmModal: true,
-      },
-    });
-
-    messModal.content?.onConfirm.subscribe(() => {
-      this.loading = true;
-      this.solarPanelService
-        .delete(panel.id)
-        .pipe(
-          takeUntil(this.$unsubscribe),
-          finalize(() => (this.loading = false))
-        )
-        .subscribe((res) => {
-          if (res.error) {
-            this.toastr.error(res.error, 'Error');
-            console.log(`Error -> ${res.error}`);
-            return;
-          } else {
-            this.toastr.success('Panel was deleted', 'Success');
-          }
-
-          this.reloadPage();
-        });
-    });
-  }
+  startCommand() {}
 }

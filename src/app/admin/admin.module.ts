@@ -9,11 +9,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TableModule } from 'primeng/table';
 
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CreateEditPanelComponent } from './dashboard/create-edit-panel/create-edit-panel.component';
-import { ViewSolarPanelComponent } from './dashboard/view-solar-panel/view-solar-panel.component';
-import { ConfiguratorComponent } from './dashboard/configurator/configurator.component';
+import { CreateEditPanelComponent } from './solar-panels/create-edit-panel/create-edit-panel.component';
+import { ViewSolarPanelComponent } from './solar-panels/view-solar-panel/view-solar-panel.component';
+import { ConfiguratorComponent } from './solar-panels/configurator/configurator.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SolarPanelComponent } from './solar-panels/solar-panel.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CreateEditPanelComponent,
     ViewSolarPanelComponent,
     ConfiguratorComponent,
+    SolarPanelComponent,
   ],
   imports: [
     CommonModule,
