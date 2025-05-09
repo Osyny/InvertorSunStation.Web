@@ -1,98 +1,14 @@
-<h2 style="margin-top: 20px">Solar Panels</h2>
+<h2 style="margin-top: 20px">Dashboard</h2>
+<!-- 
+<button (click)="click()">TEST</button>
+<a href="admin/solar-panel">Test</a> -->
 
 <div class="d-flex justify-content-end">
-  <button class="btn btn-primary" (click)="editOrAdd()">Add Solar Panel</button
-  ><button class="btn btn-primary" (click)="calculation()">Configurator</button>
+  <button class="btn btn-primary" (click)="startCommand()">
+    Start Command
+  </button>
 </div>
-
-<div class="_container">
-  <div class="panel__table">
-    <div class="table-container table-container--has-input">
-      <p-table
-        [value]="solarPanels"
-        [loading]="loading"
-        [paginator]="true"
-        [rows]="rows"
-        [lazy]="true"
-        (onLazyLoad)="lazyLoad(false, $event)"
-        [totalRecords]="totalRecords"
-      >
-        <ng-template pTemplate="header" class="table-xl-responsive">
-          <tr [class.hidden]="loading">
-            <th pSortableColumn="width" class="sticky-col">
-              Width mm
-              <p-sortIcon field="width"></p-sortIcon>
-            </th>
-            <th pSortableColumn="length" class="sticky-col">
-              Length mm
-              <p-sortIcon field="length"></p-sortIcon>
-            </th>
-            <th pSortableColumn="power" class="sticky-col">
-              Power W
-              <p-sortIcon field="power"></p-sortIcon>
-            </th>
-            <th pSortableColumn="stock" class="sticky-col">
-              Stock
-              <p-sortIcon field="stock"></p-sortIcon>
-            </th>
-            <th class="sticky-col actions"></th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-panel>
-          <tr>
-            <td class="sticky-col truncate">{{ panel?.width }}</td>
-            <td class="sticky-col truncate">{{ panel?.length }}</td>
-
-            <td class="sticky-col truncate">{{ panel.power }}</td>
-            <td class="sticky-col truncate">
-              {{ panel.stock }}
-            </td>
-            <td>
-              <div class="nav-item dropdown action-item" dropdown>
-                <button
-                  class="nav-link btn btn-primary btn-action"
-                  dropdownToggle
-                >
-                  <i class="pi pi-cog"></i><span class="caret"></span>
-                  Actions
-                </button>
-                <div
-                  class="dropdown-menu dropdown-menu-right p-0"
-                  *dropdownMenu
-                >
-                  <div class="menu-item">
-                    <button
-                      class="d-flex align-items-center btn-link btn-link-primary txt-14"
-                      (click)="editOrAdd(panel)"
-                    >
-                      <svg class="icon mr-5" width="13" height="14">
-                        <use href="/assets/img/sprite.svg#edit"></use>
-                      </svg>
-                      <span> Edit</span>
-                    </button>
-                    <button
-                      class="d-flex align-items-center btn-link btn-link-success txt-14"
-                      (click)="view(panel)"
-                    >
-                      <i class="pi pi-hammer"></i>
-                      <span> View</span>
-                    </button>
-                    <button
-                      class="d-flex align-items-center btn-link btn-link-danger txt-14"
-                      (click)="tryDelete(panel)"
-                    >
-                      <svg class="icon mr-5" width="13" height="14">
-                        <use href="assets/img/sprite.svg#delete"></use>
-                      </svg>
-                      <span> Delete</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
+<div>
+  <hr />
+  <h3>Protocol data</h3>
 </div>

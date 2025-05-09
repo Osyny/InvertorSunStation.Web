@@ -32,7 +32,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
-  background: linear-gradient(to top, #96fbc459 0%, #f9f58600 100%);
+  background: linear-gradient(to top, #269bea44 0%, #faf9f73f 100%);
   padding: 0 50px;
 }
 
@@ -422,12 +422,21 @@ a:hover svg {
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 0;
+  right: 13%;
   /* margin-right: 20px; */
   padding: 10px;
-  top: 50%;
+  top: 54%;
   z-index: 10;
-  transform: translateY(-50%);
+  //transform: translateY(-50%);
+  cursor: pointer;
+}
+.btn-has-icon-eye {
+  align-items: center;
+  justify-content: center;
+  right: 13%;
+  padding: 10px;
+  top: 54%;
+  z-index: 10;
   cursor: pointer;
 }
 .btn-has-icon-left svg {
@@ -458,6 +467,8 @@ a:hover svg {
   padding: 1.125rem;
   border: 1px solid #dbdbdb;
   border-radius: 5px;
+
+  height: 41px;
 }
 .form-control.form-modal .p-dropdown {
   border: 0;
@@ -727,6 +738,10 @@ input {
   padding: 0;
   border-bottom: 0;
   position: relative;
+}
+
+.modal-content {
+  border: none !important;
 }
 
 .modal-header .close {

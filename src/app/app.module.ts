@@ -23,6 +23,8 @@ import { LayoutStoreService } from './shared/layout/layout-store.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,6 +33,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     HttpClientModule,
     PanelMenuModule,
     AnimateModule,
+    FormsModule,
 
     BrowserAnimationsModule,
     // NgToastModule,
@@ -42,7 +45,6 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     CollapseModule.forRoot(),
   ],
 
-  providers: [provideClientHydration(), CookieService, LayoutStoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
