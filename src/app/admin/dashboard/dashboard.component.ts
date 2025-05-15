@@ -62,7 +62,6 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
 
   getEmploys() {
     this.authService.test().subscribe((res) => {
-      debugger;
       let r = res;
     });
   }

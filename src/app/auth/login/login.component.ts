@@ -34,6 +34,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
         this.authService.setToken(res.response);
+        // TODO navigate by role
         this.router.navigateByUrl('/admin'); // Redirect to dashboard on successful login
         this.toastr.success('Login is success!', 'Success');
         this.submitting = false;

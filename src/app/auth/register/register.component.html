@@ -1,0 +1,126 @@
+<h2 class="text-center txt-dgray mb-4">Register account</h2>
+<form
+  novalidate
+  autocomplete="off"
+  #registerForm="ngForm"
+  (ngSubmit)="onRegister(registerForm)"
+>
+  <div class="form-group mb-10">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="firstName"
+        placeholder="Name..."
+        required
+        maxlength="64"
+        [(ngModel)]="registerDto.firstName"
+        #firstNameModel="ngModel"
+        #firstNameEl
+      />
+    </div>
+    <validation-summary
+      [control]="firstNameModel"
+      [controlEl]="firstNameEl"
+    ></validation-summary>
+  </div>
+  <div class="form-group mb-10">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="surname"
+        placeholder="Surname..."
+        required
+        maxlength="64"
+        [(ngModel)]="registerDto.lastName"
+        #surnameModel="ngModel"
+        #surnameEl
+      />
+    </div>
+    <validation-summary
+      [control]="surnameModel"
+      [controlEl]="surnameEl"
+    ></validation-summary>
+  </div>
+  <div class="form-group mb-10">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="userNameOrEmailAddress"
+        [(ngModel)]="registerDto.userName"
+        [placeholder]="'UserName...'"
+        required
+        maxlength="256"
+        #userNameModel="ngModel"
+        #userNameEl
+      />
+    </div>
+    <validation-summary
+      [control]="$any(userNameModel)"
+      [controlEl]="$any(userNameEl)"
+    ></validation-summary>
+  </div>
+  <div class="form-group mb-10">
+    <div class="input-group">
+      <input
+        type="email"
+        class="form-control"
+        name="emailAddress"
+        placeholder="Email Address..."
+        required
+        maxlength="256"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+        [(ngModel)]="registerDto.email"
+        #emailAddressModel="ngModel"
+        #emailAddressEl
+      />
+    </div>
+    <validation-summary
+      [control]="$any(emailAddressModel)"
+      [controlEl]="emailAddressEl"
+    ></validation-summary>
+  </div>
+  <div class="form-group row required mb-10">
+    <div class="col-md-12 mb-3">
+      <div class="input-pass-eye">
+        <input
+          [type]="type"
+          class="form-control"
+          maxlength="32"
+          reverse="true"
+          name="newPassword"
+          id="newPassword"
+          required
+          [(ngModel)]="registerDto.password"
+          pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$"
+          #newPasswordModel="ngModel"
+          #newPasswordEl
+          placeholder="password ..."
+        />
+        <div class="btn-has-icon-eye" (click)="togglePasswordFieldType()">
+          <svg class="icon" width="19" height="15">
+            <use
+              [attr.href]="
+                isTextFieldType
+                  ? '/assets/img/sprite.svg#eye-open'
+                  : '/assets/img/sprite.svg#eye-close'
+              "
+            ></use>
+          </svg>
+        </div>
+      </div>
+      <validation-summary
+        [control]="$any(newPasswordModel)"
+        [controlEl]="$any(newPasswordEl)"
+        [customValidationErrors]="passwordValidationErrors"
+      ></validation-summary>
+    </div>
+  </div>
+  <div class="form-group d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary" [disabled]="submitting">
+      Register
+    </button>
+  </div>
+</form>

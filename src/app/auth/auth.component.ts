@@ -6,6 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AppComponentBase } from '../shared/app-component-base';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -13,9 +15,26 @@ import { AppComponentBase } from '../shared/app-component-base';
   encapsulation: ViewEncapsulation.None,
 })
 export class AuthComponent extends AppComponentBase implements OnInit {
-  constructor(injector: Injector, private renderer: Renderer2) {
+  isLoginPage: boolean = false;
+  constructor(
+    injector: Injector,
+    private router: Router,
+    private authService: AuthService
+  ) {
     super(injector);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.isLoginView$.subscribe((res) => {
+      this.isLoginPage = res;
+    });
+  }
+  clickLoginPage() {
+    this.authService.updateIsLoginView(true);
+  }
+
+  back() {
+    this.authService.updateIsLoginView(false);
+    // this.router.navigateByUrl('auth');
+  }
 }
