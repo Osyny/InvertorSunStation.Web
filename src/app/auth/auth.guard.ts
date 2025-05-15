@@ -15,11 +15,10 @@ export namespace AuthGuard {
   ) => {
     const authService = inject(AuthService);
     const router = inject(Router);
-    debugger;
     if (inject(AuthService).isAuthenticated()) {
       return true;
     } else {
-      inject(Router).navigate(['/login']);
+      inject(Router).navigate(['/auth']);
       return false;
     }
   };

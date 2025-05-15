@@ -3,7 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
-import { LoginDto } from '../../models/login.dto';
+import { LoginDto } from '../../models/auth/login.dto';
+import { RegisterUserDto } from '../../models/auth/register-user.dto';
+import { ResponseOutput } from '../../models/response.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +21,14 @@ export class AuthService {
     dto.username = username;
     dto.password = password;
 
-    let t = this.http.post(`${this.apiUrl}/Authentication/login`, dto);
-    return t;
+    return this.http.post(`${this.apiUrl}/Authentication/login`, dto);
+  }
+
+  register(dto: RegisterUserDto): Observable<ResponseOutput> {
+    return this.http.post<ResponseOutput>(
+      `${this.apiUrl}/Authentication/register`,
+      dto
+    );
   }
 
   test(): Observable<any> {
@@ -43,10 +51,9 @@ export class AuthService {
   logout(): void {
     this.token = null;
     localStorage.removeItem('access_token');
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/auth');
   }
   isAuthenticated(): boolean {
-    debugger;
     let res = this.getToken() !== null;
     return res;
   }

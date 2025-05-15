@@ -19,6 +19,10 @@
         #userNameOrEmailAddressEl
       />
     </div>
+    <validation-summary
+      [control]="$any(userNameOrEmailAddressModel)"
+      [controlEl]="$any(userNameOrEmailAddressEl)"
+    ></validation-summary>
   </div>
   <div class="form-group row required mb-10">
     <div class="col-md-12 mb-3">
@@ -48,10 +52,11 @@
           </svg>
         </div>
       </div>
+      <validation-summary
+        [control]="$any(newPasswordModel)"
+        [controlEl]="$any(newPasswordEl)"
+      ></validation-summary>
     </div>
-  </div>
-  <div class="form-group d-flex justify-content-end link-login">
-    <button class="btn-link btn-link-secondary txt-16 fw-500">Register</button>
   </div>
   <div class="form-group d-flex justify-content-center">
     <button type="submit" class="btn btn-primary" [disabled]="submitting">
