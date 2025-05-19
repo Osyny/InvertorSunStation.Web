@@ -4,7 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthSubscribingChangesService {
+  constructor() {}
   private isLoginViewSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(true);
 

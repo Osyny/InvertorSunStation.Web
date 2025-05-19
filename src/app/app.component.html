@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="container-fluid container-fluid--height">
+  <div *ngIf="isAuthorized">
+    <app-header></app-header>
+  </div>
+
+  <main>
+    <div class="content d-flex">
+      <div class="authorized-main-box"><router-outlet></router-outlet></div>
+    </div>
+  </main>
+</div>

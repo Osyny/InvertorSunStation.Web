@@ -7,34 +7,28 @@ import {
 } from '@angular/core';
 import { AppComponentBase } from '../shared/app-component-base';
 import { Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AuthSubscribingChangesService } from './services/auth-subscribing-changes.service';
 
 @Component({
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AuthComponent extends AppComponentBase implements OnInit {
+export class AuthComponent implements OnInit {
   isLoginPage: boolean = false;
-  constructor(
-    injector: Injector,
-    private router: Router,
-    private authService: AuthService
-  ) {
-    super(injector);
-  }
+  constructor(private authChangesService: AuthSubscribingChangesService) {}
 
   ngOnInit(): void {
-    this.authService.isLoginView$.subscribe((res) => {
+    this.authChangesService.isLoginView$.subscribe((res) => {
       this.isLoginPage = res;
     });
   }
   clickLoginPage() {
-    this.authService.updateIsLoginView(true);
+    this.authChangesService.updateIsLoginView(true);
   }
 
   back() {
-    this.authService.updateIsLoginView(false);
+    this.authChangesService.updateIsLoginView(false);
     // this.router.navigateByUrl('auth');
   }
 }
