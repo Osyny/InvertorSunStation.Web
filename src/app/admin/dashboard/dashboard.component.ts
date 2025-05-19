@@ -38,6 +38,8 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
   totalRecords: number = 0;
   inputData = new FilterInput();
 
+  test: any;
+
   $unsubscribe = new Subject<void>();
   private readonly _primengTableHelper = new PrimengTableHelper();
 
@@ -60,10 +62,5 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
     this.router.navigateByUrl('admin/solar-panel');
   }
 
-  getEmploys() {
-    this.authService.test().subscribe((res) => {
-      let r = res;
-    });
-  }
   startCommand() {}
 }

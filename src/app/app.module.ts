@@ -6,7 +6,7 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { AnimateModule } from 'primeng/animate';
 
@@ -24,9 +24,20 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptorService } from './services/auth/auth.interceptor';
+import { HeaderUserComponent } from './layout/headers/header-user/header-user.component';
+import { HeaderComponent } from './layout/headers/header/header.component';
+import { HeaderBrandComponent } from './layout/headers/header-brand/header-brand.component';
+import { UserAvatarComponent } from './layout/headers/user-avatar/user-avatar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HeaderUserComponent,
+    HeaderBrandComponent,
+    UserAvatarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +54,14 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    LayoutStoreService,
   ],
 
   bootstrap: [AppComponent],

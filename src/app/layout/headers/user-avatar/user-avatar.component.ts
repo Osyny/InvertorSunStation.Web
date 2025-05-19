@@ -1,28 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from './services/auth/auth.service';
-import { UserStoreService } from './auth/services/user-store.service';
+
+import { AuthService } from '../../../services/auth/auth.service';
+import { UserDisplayedDto } from '../../../models/users/user-displayed.dto';
+import { UserStoreService } from '../../../auth/services/user-store.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  selector: 'app-user-avatar',
+  templateUrl: './user-avatar.component.html',
+  styleUrl: './user-avatar.component.scss',
 })
-export class AppComponent implements OnInit {
-  isAuthorized?: boolean = false;
+export class UserAvatarComponent implements OnInit {
   userName: string | undefined;
   role: string | undefined;
+  loading: boolean = false;
+  currentUser: UserDisplayedDto = new UserDisplayedDto();
 
   constructor(
     private authService: AuthService,
     private userStore: UserStoreService
   ) {}
-  title = 'Web';
-
   ngOnInit(): void {
-    this.userStore.isUserAuth$.subscribe((res) => {
-      this.isAuthorized = res;
-    });
     this.userStore.getFullNameFromStore().subscribe((val) => {
       const fullNameFromToken = this.authService.getFullNameFromToken();
 
@@ -34,4 +31,8 @@ export class AppComponent implements OnInit {
       this.role = val || roleFromToken;
     });
   }
+
+  // backToMyAccount() {
+  //   this.clickBackToMyAccount.emit(true);
+  // }
 }
