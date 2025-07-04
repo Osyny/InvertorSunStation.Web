@@ -24,7 +24,8 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document,
     private http: HttpClient,
     private router: Router,
-    private userStoreService: UserStoreService
+    private userStoreService: UserStoreService,
+    private userStore: UserStoreService
   ) {
     const localStorage = document.defaultView?.localStorage;
     this.localStorage = localStorage;
@@ -74,6 +75,10 @@ export class AuthService {
     this.token = null;
     localStorage.removeItem('access_token');
     this.userStoreService.updateIsUserAuth(false);
+
+    this.userStore.setFullNameForStore('');
+    this.userStore.setRoleForStore('');
+
     this.router.navigateByUrl('/auth');
   }
   isAuthenticated(): boolean {

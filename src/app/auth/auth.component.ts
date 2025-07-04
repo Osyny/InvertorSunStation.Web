@@ -1,5 +1,6 @@
 import {
   Component,
+  inject,
   Injector,
   OnInit,
   Renderer2,
@@ -8,6 +9,7 @@ import {
 import { AppComponentBase } from '../shared/app-component-base';
 import { Router } from '@angular/router';
 import { AuthSubscribingChangesService } from './services/auth-subscribing-changes.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   templateUrl: './auth.component.html',

@@ -25,7 +25,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
-
     if (token) {
       // If we have a token, we set it to the header
       request = request.clone({
@@ -42,7 +41,8 @@ export class AuthInterceptorService implements HttpInterceptor {
               'Token is expired, Please Login again',
               'Warning'
             );
-            this.router.navigateByUrl('/auth');
+            this.authService.logout();
+            // this.router.navigateByUrl('/auth');
           }
         }
         return throwError(err);

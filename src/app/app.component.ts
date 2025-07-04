@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth/auth.service';
 import { UserStoreService } from './auth/services/user-store.service';
@@ -22,16 +22,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userStore.isUserAuth$.subscribe((res) => {
       this.isAuthorized = res;
-    });
-    this.userStore.getFullNameFromStore().subscribe((val) => {
-      const fullNameFromToken = this.authService.getFullNameFromToken();
-
-      this.userName = val || fullNameFromToken;
-    });
-
-    this.userStore.getRoleFromStore().subscribe((val) => {
-      const roleFromToken = this.authService.getRoleFromToken();
-      this.role = val || roleFromToken;
     });
   }
 }
