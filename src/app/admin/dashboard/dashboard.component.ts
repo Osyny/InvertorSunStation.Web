@@ -14,7 +14,7 @@ import { SolarPanelService } from '../../services/solar-panel/solar-panel.servic
 import { SolarPanelDisplayedDto } from '../../models/solar-panels/solar-panel.displayed.dto';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { FilterInput } from '../solar-panels/dtos/filter-input';
+import { FilterInput } from '../../models/filter-input';
 import { ViewSolarPanelComponent } from '../solar-panels/view-solar-panel/view-solar-panel.component';
 import { ConfiguratorComponent } from '../solar-panels/configurator/configurator.component';
 import { ModalMessagesComponent } from '../../shared/modal-messages/modal-messages.component';
@@ -63,4 +63,8 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
   }
 
   startCommand() {}
+
+  getDataCommand() {
+    this.router.navigateByUrl('admin/solar-panel');
+  }
 }

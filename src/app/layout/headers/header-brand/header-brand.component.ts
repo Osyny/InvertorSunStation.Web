@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { LayoutStoreService } from '../../../shared/layout/layout-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-brand',
@@ -10,7 +11,10 @@ import { LayoutStoreService } from '../../../shared/layout/layout-store.service'
 export class HeaderBrandComponent implements OnInit {
   sidebarExpanded: boolean = false;
 
-  constructor(private _layoutStore: LayoutStoreService) {}
+  constructor(
+    private _layoutStore: LayoutStoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this._layoutStore.sidebarExpanded.subscribe((value) => {
@@ -20,5 +24,9 @@ export class HeaderBrandComponent implements OnInit {
 
   toggleSidebar(): void {
     this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
+  }
+
+  click() {
+    this.router.navigateByUrl('admin');
   }
 }

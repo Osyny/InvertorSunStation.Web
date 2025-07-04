@@ -1,0 +1,110 @@
+<div class="_container">
+  <div class="panel__table">
+    <div class="table-container table-container--has-input">
+      <p-table
+        [value]="protocolData"
+        [loading]="loading"
+        [paginator]="true"
+        [rows]="rows"
+        [lazy]="true"
+        (onLazyLoad)="lazyLoad(false, $event)"
+        [totalRecords]="totalRecords"
+      >
+        <ng-template pTemplate="header" class="table-xl-responsive">
+          <tr [class.hidden]="loading">
+            <th pSortableColumn="date" class="sticky-col">
+              Date
+              <p-sortIcon field="date"></p-sortIcon>
+            </th>
+            <th pSortableColumn="gridVoltage" class="sticky-col">
+              Grid Voltage
+              <p-sortIcon field="gridVoltage"></p-sortIcon>
+            </th>
+            <th pSortableColumn="gridFrequency" class="sticky-col">
+              Grid Frequency
+              <p-sortIcon field="gridFrequency"></p-sortIcon>
+            </th>
+            <th pSortableColumn="aCOutputApparentPower" class="sticky-col">
+              AC Output Apparent Power
+              <p-sortIcon field="aCOutputApparentPower"></p-sortIcon>
+            </th>
+            <th pSortableColumn="aCOutputActivePower" class="sticky-col">
+              AC Output Active Power
+              <p-sortIcon field="aCOutputActivePower"></p-sortIcon>
+            </th>
+            <th pSortableColumn="outputLoadPercent" class="sticky-col">
+              Output Load Percent
+              <p-sortIcon field="outputLoadPercent"></p-sortIcon>
+            </th>
+            <th pSortableColumn="deviceStatus2" class="sticky-col">
+              Device Status2
+              <p-sortIcon field="deviceStatus2"></p-sortIcon>
+            </th>
+            <th class="sticky-col actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-panel>
+          <tr>
+            <td class="sticky-col truncate">
+              {{ panel?.date | date : "yyyy-MM-dd HH:mm" }}
+            </td>
+            <td class="sticky-col truncate">{{ panel?.gridVoltage }}</td>
+
+            <td class="sticky-col truncate">{{ panel.gridFrequency }}</td>
+            <td class="sticky-col truncate">
+              {{ panel.acOutputApparentPower }}
+            </td>
+            <td class="sticky-col truncate">
+              {{ panel.acOutputActivePower }}
+            </td>
+            <td class="sticky-col truncate">{{ panel.outputLoadPercent }}</td>
+            <td class="sticky-col truncate">{{ panel.deviceStatus2 }}</td>
+            <td>
+              <div class="nav-item dropdown action-item" dropdown>
+                <button
+                  class="nav-link btn btn-primary btn-action"
+                  dropdownToggle
+                >
+                  <i class="pi pi-cog"></i><span class="caret"></span>
+                  Actions
+                </button>
+                <div
+                  class="dropdown-menu dropdown-menu-right p-0"
+                  *dropdownMenu
+                >
+                  <div class="menu-item">
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-primary txt-14"
+                      (click)="editOrAdd(panel)"
+                    >
+                      <svg class="icon mr-5" width="13" height="14">
+                        <use href="/assets/img/sprite.svg#edit"></use>
+                      </svg>
+                      <span> Edit</span>
+                    </button>
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-success txt-14"
+                      (click)="view(panel)"
+                    >
+                      <i class="pi pi-hammer"></i>
+                      <span> View</span>
+                    </button>
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-danger txt-14"
+                      (click)="tryDelete(panel)"
+                    >
+                      <svg class="icon mr-5" width="13" height="14">
+                        <use href="assets/img/sprite.svg#delete"></use>
+                      </svg>
+                      <span> Delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

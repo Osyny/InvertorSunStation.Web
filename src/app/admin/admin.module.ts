@@ -15,6 +15,7 @@ import { ConfiguratorComponent } from './solar-panels/configurator/configurator.
 import { DropdownModule } from 'primeng/dropdown';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SolarPanelComponent } from './solar-panels/solar-panel.component';
+import { ProtocolDataComponent } from './protocol-data/protocol-data.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SolarPanelComponent } from './solar-panels/solar-panel.component';
     ViewSolarPanelComponent,
     ConfiguratorComponent,
     SolarPanelComponent,
+    ProtocolDataComponent,
   ],
   imports: [
     CommonModule,

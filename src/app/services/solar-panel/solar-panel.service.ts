@@ -8,7 +8,7 @@ import {
   SolarPanelsResponse,
 } from '../../models/solar-panels/solar-panel.dto';
 import { ConfiguratorResponse } from '../../models/solar-panels/configurator-response.dto';
-import { FilterInput } from '../../admin/solar-panels/dtos/filter-input';
+import { FilterInput } from '../../models/filter-input';
 import { OutputDataResponse } from '../output-data-response';
 import { DataConfigurator } from '../../admin/solar-panels/dtos/data-configurator.dto';
 
