@@ -5,6 +5,10 @@
 
   <main>
     <div class="content d-flex">
+      <div *ngIf="isAuthorized">
+        <sidebar></sidebar>
+      </div>
+
       <div class="authorized-main-box"><router-outlet></router-outlet></div>
     </div>
   </main>

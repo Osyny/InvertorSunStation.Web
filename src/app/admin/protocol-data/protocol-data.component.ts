@@ -50,7 +50,6 @@ export class ProtocolDataComponent extends AppComponentBase implements OnInit {
   }
 
   lazyLoad(isFilter: boolean, event?: TableLazyLoadEvent) {
-    debugger;
     if (
       this.isPaginated(event) &&
       !isFilter &&
@@ -77,7 +76,6 @@ export class ProtocolDataComponent extends AppComponentBase implements OnInit {
         finalize(() => (this.loading = false))
       )
       .subscribe((res) => {
-        debugger;
         this.protocolData = res.protocolData;
         this.totalRecords = res.total;
       });

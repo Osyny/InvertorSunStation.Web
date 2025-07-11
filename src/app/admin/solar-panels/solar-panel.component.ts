@@ -21,13 +21,18 @@ import { ModalMessagesComponent } from '../../shared/modal-messages/modal-messag
 import { ToastrService } from 'ngx-toastr';
 import { CreateEditPanelComponent } from '../solar-panels/create-edit-panel/create-edit-panel.component';
 import { Router } from '@angular/router';
+import { DashboardPageService } from '../../shared/helpers/dashboard-page-service';
+import { PageRedirectEnumForAdmin } from '../../shared/enums/page-redirect.enum';
 
 @Component({
   selector: 'app-test',
   templateUrl: './solar-panel.component.html',
   styleUrl: './solar-panel.component.scss',
 })
-export class SolarPanelComponent extends AppComponentBase implements OnInit {
+export class SolarPanelComponent
+  extends AppComponentBase
+  implements AfterViewInit
+{
   solarPanels: SolarPanelDto[] = [];
   loading = false;
 
@@ -49,7 +54,11 @@ export class SolarPanelComponent extends AppComponentBase implements OnInit {
   ) {
     super(injector);
   }
-  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    let page = Number.parseInt(`${PageRedirectEnumForAdmin.protocolData}`);
+    DashboardPageService.getInstance().setData(page);
+  }
 
   isPaginated(event?: TableLazyLoadEvent) {
     let res = event?.first != this.totalRecords && this.totalRecords != 0;

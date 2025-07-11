@@ -15,6 +15,7 @@ export namespace AuthGuard {
   ) => {
     const authService = inject(AuthService);
     const router = inject(Router);
+
     if (inject(AuthService).isAuthenticated()) {
       return true;
     } else {

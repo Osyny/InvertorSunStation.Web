@@ -2,7 +2,10 @@
 <button (click)="click()">TEST</button>
 <a href="admin/solar-panel">Test</a> -->
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-between">
+  <button class="btn btn-primary" (click)="getDataCommand()">
+    Page Info Solar panels
+  </button>
   <button class="btn btn-primary" (click)="startCommand()">
     Start Command
   </button>
@@ -11,9 +14,4 @@
   <hr />
   <h3>Protocol data</h3>
   <app-protocol-data></app-protocol-data>
-  <div class="d-flex justify-content-end">
-    <button class="btn btn-primary" (click)="getDataCommand()">
-      Page Info Solar panels
-    </button>
-  </div>
 </div>
