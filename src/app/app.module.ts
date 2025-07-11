@@ -29,6 +29,8 @@ import { HeaderUserComponent } from './layout/headers/header-user/header-user.co
 import { HeaderComponent } from './layout/headers/header/header.component';
 import { HeaderBrandComponent } from './layout/headers/header-brand/header-brand.component';
 import { UserAvatarComponent } from './layout/headers/user-avatar/user-avatar.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { SidebarMenuComponent } from './layout/sidebar/sidebar-menu.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,9 @@ import { UserAvatarComponent } from './layout/headers/user-avatar/user-avatar.co
     HeaderUserComponent,
     HeaderBrandComponent,
     UserAvatarComponent,
+
+    SidebarComponent,
+    SidebarMenuComponent,
   ],
   imports: [
     BrowserModule,

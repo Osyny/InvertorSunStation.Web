@@ -1,5 +1,6 @@
 import {
   Component,
+  Inject,
   inject,
   Injector,
   OnInit,
@@ -10,6 +11,7 @@ import { AppComponentBase } from '../shared/app-component-base';
 import { Router } from '@angular/router';
 import { AuthSubscribingChangesService } from './services/auth-subscribing-changes.service';
 import { AuthService } from '../services/auth/auth.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -18,7 +20,18 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class AuthComponent implements OnInit {
   isLoginPage: boolean = false;
-  constructor(private authChangesService: AuthSubscribingChangesService) {}
+  localStorage!: Storage | undefined;
+  constructor(
+    private authChangesService: AuthSubscribingChangesService,
+    private authService: AuthService,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    const localStorage = document.defaultView?.localStorage;
+    this.localStorage = localStorage;
+    if (this.localStorage) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit(): void {
     this.authChangesService.isLoginView$.subscribe((res) => {
