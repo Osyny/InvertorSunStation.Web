@@ -1,10 +1,11 @@
 export class UserDisplayedDto {
-  id?: number;
+  id?: number | undefined;
   email?: string;
-  userName?: string | undefined = '';
+  userName: string = '';
   password?: string;
   firstName?: string;
   lastName?: string;
   token?: string;
   roleName?: string;
+  roles: string[] = [];
 }

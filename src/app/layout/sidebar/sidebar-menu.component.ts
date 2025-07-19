@@ -88,7 +88,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     ];
 
     if (this.roleFromToken && this.roleFromToken === 'Admin') {
-      menuItems.push(new MenuItem('Users', 'admin/solar-panel', 'user', ''));
+      menuItems.push(new MenuItem('Users', '/admin/users', 'user', ''));
     }
     return menuItems;
   }

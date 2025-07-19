@@ -31,6 +31,7 @@ import { HeaderBrandComponent } from './layout/headers/header-brand/header-brand
 import { UserAvatarComponent } from './layout/headers/user-avatar/user-avatar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { SidebarMenuComponent } from './layout/sidebar/sidebar-menu.component';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { SidebarMenuComponent } from './layout/sidebar/sidebar-menu.component';
       multi: true,
     },
     LayoutStoreService,
+    ConfirmationService,
   ],
 
   bootstrap: [AppComponent],

@@ -16,6 +16,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SolarPanelComponent } from './solar-panels/solar-panel.component';
 import { ProtocolDataComponent } from './protocol-data/protocol-data.component';
+import { UsersComponent } from './users/users.component';
+import { CreateEditUserComponent } from './users/create-edit-user/create-edit-user.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ import { ProtocolDataComponent } from './protocol-data/protocol-data.component';
     ConfiguratorComponent,
     SolarPanelComponent,
     ProtocolDataComponent,
+
+    UsersComponent,
+    CreateEditUserComponent,
   ],
   imports: [
     CommonModule,

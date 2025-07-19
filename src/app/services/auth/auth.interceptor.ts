@@ -42,9 +42,10 @@ export class AuthInterceptorService implements HttpInterceptor {
               'Warning'
             );
             this.authService.logout();
-            // this.router.navigateByUrl('/auth');
           }
+          this.toastr.error(err.error.message, 'Error');
         }
+
         return throwError(err);
       })
     );

@@ -103,14 +103,7 @@ export class ProtocolDataComponent extends AppComponentBase implements OnInit {
     // });
   }
 
-  view(solarPanel?: any) {
-    // const viewModal = this._modalService.show(ViewSolarPanelComponent, {
-    //   class: 'modal-lg',
-    //   initialState: {
-    //     solarPanel: solarPanel,
-    //   },
-    // });
-  }
+  view(solarPanel?: any) {}
 
   tryDelete(panel: any) {
     // const messModal = this._modalService.show(ModalMessagesComponent, {
