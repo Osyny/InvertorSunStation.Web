@@ -1,0 +1,89 @@
+<h1>Users Page</h1>
+<div class="d-flex justify-content-end">
+  <button class="btn btn-primary mb-10" (click)="editOrCreate()">
+    Add New User
+  </button>
+</div>
+<div class="user_container">
+  <spiner *ngIf="!totalRecords && loading"></spiner>
+  <div *ngIf="totalRecords" class="panel__table">
+    <div class="table-container table-container--has-input">
+      <p-table
+        [value]="users"
+        [paginator]="true"
+        [rows]="rows"
+        [lazy]="true"
+        (onLazyLoad)="lazyLoadUser($event)"
+        [totalRecords]="totalRecords"
+        [loading]="loading"
+      >
+        <ng-template pTemplate="header" class="table-xl-responsive">
+          <tr>
+            <th pSortableColumn="username" class="sticky-col">
+              Name
+              <p-sortIcon field="username"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email" class="sticky-col">
+              Email
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th class="sticky-col">Role</th>
+            <th class="sticky-col actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+          <tr>
+            <td class="sticky-col truncate">{{ user?.userName }}</td>
+
+            <td class="sticky-col truncate">{{ user?.email }}</td>
+            <td class="sticky-col truncate">{{ user?.roles[0] }}</td>
+            <td>
+              <div class="nav-item dropdown action-item" dropdown>
+                <button
+                  class="nav-link btn btn-primary btn-action"
+                  dropdownToggle
+                >
+                  <i class="pi pi-cog"></i><span class="caret"></span>
+                  Actions
+                </button>
+                <div
+                  class="dropdown-menu dropdown-menu-right p-0"
+                  *dropdownMenu
+                >
+                  <div class="menu-item">
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-primary txt-14"
+                      (click)="editOrCreate(user)"
+                    >
+                      <svg class="icon mr-5" width="13" height="14">
+                        <use href="assets/img/sprite.svg#edit"></use>
+                      </svg>
+                      <span> Edit</span>
+                    </button>
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-success txt-14"
+                      (click)="updatePassword(user)"
+                    >
+                      <i class="pi pi-hammer"></i>
+                      <span> Update password</span>
+                    </button>
+
+                    <button
+                      class="d-flex align-items-center btn-link btn-link-danger txt-14"
+                      (click)="tryDeleteAsset(user)"
+                    >
+                      <svg class="icon mr-5" width="13" height="14">
+                        <use href="assets/img/sprite.svg#delete"></use>
+                      </svg>
+                      <span> Delete</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

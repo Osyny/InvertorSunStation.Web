@@ -1,0 +1,225 @@
+<form class="form-horizontal" autocomplete="off" #editUserForm="ngForm">
+  <abp-modal-header
+    [title]="title"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body mb-20">
+    <div class="container container-modal">
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="user.email"
+            name="userEmail"
+            #userEmailModel="ngModel"
+            #userEmailModelEl
+            required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+            email
+          />
+          <validation-summary
+            [control]="userEmailModel"
+            [controlEl]="userEmailModelEl"
+          ></validation-summary>
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10">User Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="user.userName"
+            name="userName"
+            #userNameModel="ngModel"
+            #userNameModelEl
+            required
+          />
+          <validation-summary
+            [title]="test"
+            [control]="userNameModel"
+            [controlEl]="userNameModelEl"
+          ></validation-summary>
+        </div>
+      </div>
+
+      <div class="row mb-15">
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10"> User First name: </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="user.firstName"
+            name="firstName"
+            #firstNameModel="ngModel"
+            #firstNameModelEl
+            required
+          />
+          <validation-summary
+            [control]="firstNameModel"
+            [controlEl]="firstNameModelEl"
+          ></validation-summary>
+        </div>
+        <div class="col-6">
+          <label class="txt-14 fw-500 mb-10"> User Last name: </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="user.lastName"
+            name="lastName"
+            #lastNameModel="ngModel"
+            #lastNameModelEl
+            required
+          />
+          <validation-summary
+            [control]="lastNameModel"
+            [controlEl]="lastNameModelEl"
+          ></validation-summary>
+        </div>
+      </div>
+      <div *ngIf="roleUserDtos?.length" class="roles-block">
+        <label class="txt-16 fw-500 mb-10">User Roles</label>
+        <div class="form-group row mb-0" style="margin-bottom: 10px">
+          <ng-container *ngFor="let role of roleUserDtos; let i = index">
+            <div class="col-md-6">
+              <div class="custom-control custom-radio d-inline mb-10">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  [id]="'role_' + i"
+                  [name]="'role_' + i"
+                  value="role.isChecked"
+                  [checked]="checkedRolesMap[role.normalizedName]"
+                  (change)="onRoleChange(role, $event)"
+                  [disabled]="role.isDisabled"
+                />
+                <label class="custom-control-label" [for]="'role_' + i">
+                  {{ role.name }}
+                </label>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <ng-container *ngIf="!isEdit">
+        <div class="form-group row required">
+          <div class="col-md-6">
+            <label class="col-form-label" for="password"> Password </label>
+            <div class="input-pass">
+              <input
+                [type]="isTextFieldType ? 'text' : 'password'"
+                class="form-control"
+                name="password"
+                id="password"
+                required
+                maxlength="32"
+                reverse="true"
+                pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$"
+                [(ngModel)]="user.password"
+                #passwordModel="ngModel"
+                #passwordEl
+              />
+              <div class="btn-has-eye-icon" (click)="togglePasswordFieldType()">
+                <svg class="icon">
+                  <use
+                    [attr.href]="
+                      isTextFieldType
+                        ? '/assets/img/sprite.svg#eye-open'
+                        : '/assets/img/sprite.svg#eye-close'
+                    "
+                  ></use>
+                </svg>
+              </div>
+            </div>
+            <validation-summary
+              [control]="passwordModel"
+              [controlEl]="passwordEl"
+              [customValidationErrors]="passwordValidationErrors"
+              (isValidationError)="(isValidationError)"
+            ></validation-summary>
+          </div>
+          <div class="col-md-6">
+            <label class="col-form-label" for="confirmPassword">
+              Confirm Password
+            </label>
+            <div class="input-pass">
+              <input
+                [type]="isTextConfirmFieldType ? 'text' : 'password'"
+                class="form-control"
+                [ngClass]="{ 'form-control-invalid': isErrorEquals }"
+                name="confirmPassword"
+                id="confirmPassword"
+                required
+                maxlength="32"
+                validateEqual="password"
+                reverse="false"
+                [(ngModel)]="confirmPassword"
+                #confirmPasswordModel="ngModel"
+                #confirmPasswordEl
+              />
+              <div
+                class="btn-has-eye-icon"
+                (click)="togglePasswordConfirmFieldType()"
+              >
+                <svg class="icon">
+                  <use
+                    [attr.href]="
+                      isTextConfirmFieldType
+                        ? '/assets/img/sprite.svg#eye-open'
+                        : '/assets/img/sprite.svg#eye-close'
+                    "
+                  ></use>
+                </svg>
+              </div>
+            </div>
+            <validation-summary
+              [control]="$any(confirmPasswordModel)"
+              [controlEl]="$any(confirmPasswordEl)"
+            ></validation-summary>
+            <div
+              [hidden]="isErrorEquals"
+              class="error-box d-flex justify-content-start"
+            >
+              <span class="form-control-feedback">
+                {{ errorValidateEqual }}
+              </span>
+              <!-- <error-validation
+                [errorValidate]="errorValidateEqual"
+              ></error-validation> -->
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="btns btns--start">
+            <button class="btn btn-secondary" type="button" (click)="cancel()">
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              type="submit"
+              (click)="save(editUserForm)"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-header d-flex justify-content-b">
+    <h4 class="modal-title">User</h4>
+    <button type="button" class="close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ user?.email }}
+  </div> -->
+</form>
+<!-- <notifier-container></notifier-container> -->

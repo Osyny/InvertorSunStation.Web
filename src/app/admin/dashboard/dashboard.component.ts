@@ -22,13 +22,18 @@ import { ToastrService } from 'ngx-toastr';
 import { CreateEditPanelComponent } from '../solar-panels/create-edit-panel/create-edit-panel.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { DashboardPageService } from '../../shared/helpers/dashboard-page-service';
+import { PageRedirectEnumForAdmin } from '../../shared/enums/page-redirect.enum';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent extends AppComponentBase implements OnInit {
+export class DashboardComponent
+  extends AppComponentBase
+  implements AfterViewInit
+{
   solarPanels: SolarPanelDto[] = [];
   loading = false;
 
@@ -51,7 +56,10 @@ export class DashboardComponent extends AppComponentBase implements OnInit {
     super(injector);
   }
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    let page = Number.parseInt(`${PageRedirectEnumForAdmin.dashboard}`);
+    DashboardPageService.getInstance().setData(page);
+  }
 
   ngOnDestroy(): void {
     this.$unsubscribe.next();

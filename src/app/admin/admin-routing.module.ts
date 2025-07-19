@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { SolarPanelComponent } from './solar-panels/solar-panel.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: 'solar-panel',
         component: SolarPanelComponent,
+        canActivate: [AuthGuard.canActivate],
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
         canActivate: [AuthGuard.canActivate],
       },
     ],
